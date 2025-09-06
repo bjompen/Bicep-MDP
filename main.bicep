@@ -1,3 +1,5 @@
+extension microsoftGraphV1
+
 param DevCenterName string
 param ManagedIdentityName string
 param subnetNameName string
@@ -5,12 +7,11 @@ param vnetNameName string
 param MDPName string
 param ADOUrl string
 param MDPImageName osImages[]
-param DevOpsInfrastructurePrincipalId string
 
 type osImages = {
   aliases: string[]?
   buffer: string?
-  wellKnownImageName: 'windows-2022/latest' | 'windows-2019/latest' | 'ubuntu-22.04/latest' | 'ubuntu-20.04/latest'
+  wellKnownImageName: 'windows-2025/latest' | 'windows-2022/latest' | 'windows-2019/latest' | 'ubuntu-22.04/latest' | 'ubuntu-24.04/latest'
 }
 
 module DevCenter 'modules/DevCenter.bicep' = {
@@ -27,12 +28,16 @@ module ManagedIdentity 'modules/ManagedIdentity.bicep' = {
   }
 }
 
+resource DevOpsInfrastructurePrincipal 'Microsoft.Graph/servicePrincipals@v1.0' existing = {
+  appId: '31687f79-5e43-4c1e-8c63-d9f4bff5cf8b' 
+}
+
 module Network 'modules/Network.bicep' = {
   name: 'MDPNetwork'
   params: {
     subnetName: subnetNameName
     vnetName: vnetNameName
-    principalId: DevOpsInfrastructurePrincipalId
+    principalId: DevOpsInfrastructurePrincipal.id
   }
 }
 

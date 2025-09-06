@@ -51,7 +51,7 @@ type azureDevOpsOrg = {
 type osImages = {
   aliases: string[]?
   buffer: string?
-  wellKnownImageName: 'windows-2022/latest' | 'windows-2019/latest' | 'ubuntu-22.04/latest' | 'ubuntu-20.04/latest'
+  wellKnownImageName: 'windows-2025/latest' | 'windows-2022/latest' | 'windows-2019/latest' | 'ubuntu-22.04/latest' | 'ubuntu-24.04/latest'
 }
 
 type resourceImages = {
@@ -77,7 +77,7 @@ var lessKnownImages = [for item in standardImages: {
 var imagesList = union(wellKnownImages, lessKnownImages)
 
 // Resources
-resource MDP 'Microsoft.DevOpsInfrastructure/pools@2024-04-04-preview' = {
+resource MDP 'Microsoft.DevOpsInfrastructure/pools@2025-01-21' = {
   name: name
   location: location
   identity: {

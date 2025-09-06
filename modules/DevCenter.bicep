@@ -10,12 +10,12 @@ param location string = resourceGroup().location
 
 var devCenterProjectName = empty(projectName) ? '${name}-MDPProject' : projectName
 
-resource devCenter 'Microsoft.DevCenter/devcenters@2024-07-01-preview' = {
+resource devCenter 'Microsoft.DevCenter/devcenters@2025-07-01-preview' = {
   name: name
   location: location
 }
 
-resource devCenterProjects 'Microsoft.DevCenter/projects@2024-07-01-preview' = {
+resource devCenterProjects 'Microsoft.DevCenter/projects@2025-07-01-preview' = {
   name: devCenterProjectName
   location: location
   properties: {

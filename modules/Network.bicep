@@ -42,7 +42,7 @@ var defaultSecurityRules = [
   }  
 ]
 
-resource MDPNetwork 'Microsoft.Network/virtualNetworks@2024-01-01' = {
+resource MDPNetwork 'Microsoft.Network/virtualNetworks@2024-07-01' = {
   name: vnetName
   location: location
   properties: {
@@ -52,7 +52,7 @@ resource MDPNetwork 'Microsoft.Network/virtualNetworks@2024-01-01' = {
   }
 }
 
-resource DevOps 'Microsoft.Network/virtualNetworks/subnets@2024-01-01' = {
+resource DevOpsSubnet 'Microsoft.Network/virtualNetworks/subnets@2024-07-01' = {
   parent: MDPNetwork
   name: subnetName
   properties: {
@@ -71,7 +71,7 @@ resource DevOps 'Microsoft.Network/virtualNetworks/subnets@2024-01-01' = {
   }
 }
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2024-07-01' = {
   name: nsgName
   location: location
   properties: {
@@ -84,6 +84,7 @@ resource readerRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022-05-0
   scope: subscription()
   name: 'acdd72a7-3385-48ef-bd42-f606fba81ae7'
 }
+
 
 resource readerRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: MDPNetwork
@@ -111,4 +112,4 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-output SubnetId string = DevOps.id
+output SubnetId string = DevOpsSubnet.id
