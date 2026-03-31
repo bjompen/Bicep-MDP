@@ -51,7 +51,7 @@ type azureDevOpsOrg = {
 type osImages = {
   aliases: string[]?
   buffer: string?
-  wellKnownImageName: 'windows-2025/latest' | 'windows-2022/latest' | 'ubuntu-22.04/latest' | 'ubuntu-24.04/latest'
+  wellKnownImageName: 'windows-2025-g2/latest' | 'windows-2022-g2/latest' | 'ubuntu-22.04-g2/latest' | 'ubuntu-24.04-g2/latest'
 }
 
 type resourceImages = {
